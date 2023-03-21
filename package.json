@@ -1,42 +1,50 @@
 {
-  "name": "newrelic-node-log-extensions",
-  "version": "0.1.0",
-  "description": "The New Relic logging plugins are extensions for common Node.js logging frameworks",
+  "name": "@newrelic/winston-enricher",
+  "version": "4.0.1",
+  "description": "New Relic log enricher for the `winston` package. Allows `winston` logs to be consumed by New Relic Logs.",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "lerna run test",
-    "prepare": "husky install",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint:lockfile": "lerna run lint:lockfile",
-    "third-party-updates": "oss third-party manifest && oss third-party notices && git add THIRD_PARTY_NOTICES.md third_party_manifest.json && lerna run third-party-updates",
-    "unit": "c8 -o ./coverage/unit lerna run unit",
-    "versioned": "lerna run versioned",
-    "versioned:npm6": "c8 -o ./coverage/versioned lerna run versioned:npm6",
-    "versioned:npm7": "c8 -o ./coverage/versioned lerna run versioned:npm7"
+    "unit": "tap tests/unit/**/*.tap.js --no-coverage",
+    "lint": "eslint *.js lib tests",
+    "lint:fix": "eslint --fix *.js lib tests",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm --validate-https --validate-integrity",
+    "types": "tsd",
+    "test": "npm run unit && npm run lint && npm run types && npm run versioned"
   },
+  "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/newrelic/newrelic-node-log-extensions.git"
   },
-  "author": "New Relic Node.js Agent Team <nodejs@newrelic.com>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/newrelic/newrelic-node-log-extensions/issues"
+  "peerDependencies": {
+    "newrelic": ">=8.13.0"
   },
-  "homepage": "https://github.com/newrelic/newrelic-node-log-extensions#readme",
   "devDependencies": {
+    "@newrelic/test-utilities": "6.5.3",
     "@newrelic/eslint-config": "^0.0.4",
-    "@newrelic/newrelic-oss-cli": "^0.1.2",
-    "c8": "^7.12.0",
     "eslint": "^7.32.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.4",
-    "lerna": "^6.0.0",
-    "lint-staged": "^12.1.2",
-    "lockfile-lint": "^4.9.6",
-    "prettier": "^2.4.1"
+    "concat-stream": "2.0.0",
+    "newrelic": "8.7.1",
+    "tap": "16.2.0",
+    "tsd": "0.18.0",
+    "winston": "3.6.0"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "files": [
+    "types/**",
+    "lib/**",
+    "index.js",
+    "*.md"
+  ],
+  "tsd": {
+    "directory": "./tests/types"
   }
 }

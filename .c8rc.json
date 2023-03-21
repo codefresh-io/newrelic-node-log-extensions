@@ -1,5 +1,0 @@
-{
-    "reporter": ["html", "lcov"],
-    "all": true,
-    "exclude": ["packages/*/tests/*", "coverage/*", "packages/*/types/*", ".eslintrc.js"]
-}

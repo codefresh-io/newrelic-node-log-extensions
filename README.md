@@ -1,33 +1,52 @@
 <a href="https://opensource.newrelic.com/oss-category/#community-plus"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/dark/Community_Plus.png"><source media="(prefers-color-scheme: light)" srcset="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Plus.png"><img alt="New Relic Open Source community plus project banner." src="https://github.com/newrelic/opensource-website/raw/main/src/images/categories/Community_Plus.png"></picture></a>
 
-# New Relic Node.js logging extensions
+# @newrelic/winston-enricher
 
-[![npm status badge][5]][6] [![npm status badge][7]][8] [![Log Extensions CI][1]][2] [![codecov][9]][10]
+New Relic's official `winston` log enricher for use with the
+[Node Agent](https://github.com/newrelic/node-newrelic).
 
-The New Relic logging plugins are extensions for common Node.js logging frameworks. They are designed to capture app,
-transaction trace, and span information as part of your application log messages.
+The `winston-enricher` log format adds additional app, distributed trace and span information output as JSON-formatted log messages. This is most commonly used with the New Relic Logs product.
 
-For the latest information, please see the [New Relic Documentation](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
+For the latest information, please see [the New Relic docs](https://docs.newrelic.com/docs/logs/new-relic-logs/enable-logs-context/enable-logs-context-apm-agents).
 
-We support:
+## Installation
 
-* [Winston](packages/winston-log-enricher/README.md)
-* [Pino](packages/pino-log-enricher/README.md)
-
-## Testing
-
-This module includes a list of unit and functional tests.  To run these tests, use the following command
-
-```sh
-npm test
+```bash
+npm install @newrelic/winston-enricher
 ```
 
-You may also run individual test suites with the following commands
+## Usage
 
-```sh
-npm run unit # Unit tests
-npm run versioned # Functional tests
+```js
+// index.js
+const newrelicFormatter = require('@newrelic/winston-enricher')
+const winston = require('winston')
+const newrelicWinstonFormatter = newrelicFormatter(winston)
 ```
+
+The New Relic formatter can be used individually or combined with other
+formatters as the final format.
+
+```js
+format: winston.format.combine(
+  winston.format.label({label: 'test'}),
+  newrelicWinstonFormatter()
+)
+```
+
+**Note for unhandledException log messages:**
+
+The stack trace will be written to the `error.stack` property.
+
+To accommodate the New Relic Logs 4000 character log line limit, the `stack` and `trace` properties will be removed and the `message`, `error.message` and `error.stack` values will be truncated to 1024 characters.
+
+### Version Requirements
+
+`winston` versions 3.0.0 and greater are supported.
+
+For more information, including currently supported Node versions, please see the agent [compatibility and requirements](https://docs.newrelic.com/docs/agents/nodejs-agent/getting-started/compatibility-requirements-nodejs-agent).
+
+For general agent setup, please see the agent [installation guide](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent).
 
 ## Support
 
@@ -59,12 +78,3 @@ To all contributors, we thank you!  Without your contribution, this project woul
 
 ## License
 The New Relic Node.js loggin extensions are licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
-
-[1]: https://github.com/newrelic/newrelic-node-log-extensions/workflows/Log%20Extensions%20CI/badge.svg
-[2]: https://github.com/newrelic/newrelic-node-log-extensions/actions
-[5]: https://img.shields.io/npm/v/@newrelic/winston-enricher.svg?label=@newrelic/winston-enricher
-[6]: https://www.npmjs.com/package/@newrelic/winston-enricher
-[7]: https://img.shields.io/npm/v/@newrelic/pino-enricher.svg?label=@newrelic/pino-enricher
-[8]: https://www.npmjs.com/package/@newrelic/pino-enricher
-[9]: https://codecov.io/gh/newrelic/newrelic-node-log-extensions/branch/main/graph/badge.svg?token=QUFKIFMGO5
-[10]: https://codecov.io/gh/newrelic/newrelic-node-log-extensions

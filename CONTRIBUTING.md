@@ -1,10 +1,10 @@
 # Contributing
 
 Contributions are always welcome. Before contributing please read the
-[code of conduct](https://github.com/newrelic/.github/blob/main/CODE_OF_CONDUCT.md) and [search the issue tracker](issues); your issue may have already been discussed or fixed in `main`. To contribute,
+[code of conduct](./CODE_OF_CONDUCT.md) and [search the issue tracker](../../issues); your issue may have already been discussed or fixed in the default branch. To contribute,
 [fork](https://help.github.com/articles/fork-a-repo/) this repository, commit your changes, and [send a Pull Request](https://help.github.com/articles/using-pull-requests/).
 
-Note that our [code of conduct](https://github.com/newrelic/.github/blob/main/CODE_OF_CONDUCT.md) applies to all platforms and venues related to this project; please follow it in all your interactions with the project and its participants.
+Note that our [code of conduct](./CODE_OF_CONDUCT.md) applies to all platforms and venues related to this project; please follow it in all your interactions with the project and its participants.
 
 ## Feature Requests
 
@@ -15,8 +15,9 @@ Before submitting an Issue, please search for similar ones in the
 ## Pull Requests
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-2. Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-3. You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+2. Apply the appropriate `semver: [major|minor|patch]` label to the PR to indicate the version increase this Pull Request would represent. For more info, see: [SemVer](http://semver.org/).
+3. Apply the appropriate `risk: [high|medium|low|none]` label to the PR to indicate the estimated risk level of the changes in this Pull Request.
+4. You may merge the Pull Request in once you have the sign-off of one of the maintainers, or if you do not have permission to do that, you may request the reviewer merge it for you. In most cases, a project maintainer will merge the PR for you upon approval.
 
 ## Contributor License Agreement
 
@@ -24,7 +25,3 @@ Keep in mind that when you submit your Pull Request, you'll need to sign the CLA
 
 For more information about CLAs, please check out Alex Russell’s excellent post,
 [“Why Do I Need to Sign This?”](https://infrequently.org/2008/06/why-do-i-need-to-sign-this/).
-
-## Slack
-
-We host a public Slack with a dedicated channel for contributors and maintainers of open source projects hosted by New Relic.  If you are contributing to this project, you're welcome to request access to the #oss-contributors channel in the newrelicusers.slack.com workspace.  To request access, see https://newrelicusers-signup.herokuapp.com/.
